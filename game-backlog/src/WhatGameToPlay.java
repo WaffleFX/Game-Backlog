@@ -8,6 +8,10 @@ import java.util.ArrayList;
  * Add feature to remove/add games from list.
  * Add Settings support.
  * Add comments.
+ * 
+ * @author Yungus Thugius
+ * @version 0.0.2
+ * @since 2026-05-24
  */
 public class WhatGameToPlay
 {
@@ -23,6 +27,7 @@ public class WhatGameToPlay
 		{
 			System.out.println("Success!!\n");
 			testGameSelector(gameList);
+			testMenus(gameList);
 		}
 		
 	}
@@ -40,9 +45,25 @@ public class WhatGameToPlay
 		//GameSelector.PrintConsoleGames(gameList, "3DS");
 		//GameSelector.PrintConsoleGames(gameList, "WIU");
 		
-		ArrayList<GameToPlay> tempConsoleList = GameSelector.GetGamesForConsole(gameList, "COM");
-		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(tempConsoleList, (short)2);
-		GameSelector.PrintAllGames(tempRandomList);
+		//ArrayList<GameToPlay> tempConsoleList = GameSelector.GetGamesForConsole(gameList, "COM");
+		//ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(tempConsoleList, (short)2);
+		//GameSelector.PrintAllGames(tempRandomList);
+		
+	}
+	public static void testMenus(ArrayList<GameToPlay> gameList)
+	{
+		//ConsoleMenu.MenuZeroOne('0', gameList);
+		//ConsoleMenu.MenuZeroOne('1', gameList);
+		//ConsoleMenu.MenuZeroOne('2', gameList);
+		//ConsoleMenu.MenuZeroOne('3', gameList);
+		//ConsoleMenu.MenuZeroOne('4', gameList);
+		//ConsoleMenu.MenuZeroOne('5', gameList);
+		//ConsoleMenu.MenuZeroOne('6', gameList);
+		//ConsoleMenu.MenuZeroOne('7', gameList);
+		//ConsoleMenu.MenuZeroOne('8', gameList);
+		//ConsoleMenu.MenuZeroOne('9', gameList);
+		
+		ConsoleMenu.MenuZeroThree('1', gameList);
 		
 	}
 

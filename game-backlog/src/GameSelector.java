@@ -90,7 +90,7 @@ public class GameSelector
 			chosenIndex[i] = (short)rand.nextInt(gameCount);
 		}
 		
-		//check for duplicates
+		//check for duplicates, we only want one of each index
 		short[] noDupes = chosenIndex;
 		for(i = 0; i < amountToUse; i++)
 		{
