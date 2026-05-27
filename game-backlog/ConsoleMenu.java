@@ -17,7 +17,7 @@ public class ConsoleMenu
 		 * scan input
 		 * set z menu to current menu
 		 * send the input to correct menu panel, which will affect the list/menu as needed.
-		 * 
+		 *  
 		 * make own method
 		 * switch statement
 		 * if(menu = w)
