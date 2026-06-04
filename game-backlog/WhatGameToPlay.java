@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Add comments.
  * 
  * @author Yungus Thugius
- * @version 0.0.2
+ * @version 0.0.2 
  * @since 2026-05-24
  */
 public class WhatGameToPlay
@@ -63,7 +63,8 @@ public class WhatGameToPlay
 		//ConsoleMenu.MenuZeroOne('8', gameList);
 		//ConsoleMenu.MenuZeroOne('9', gameList);
 		
-		ConsoleMenu.MenuZeroThree('1', gameList);
+		ConsoleMenu.MenuLoop(gameList);
+		//ConsoleMenu.MenuZeroThree('1', gameList);
 		
 	}
 

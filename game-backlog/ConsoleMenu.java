@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Provides proper menus for use in the console.
@@ -40,12 +41,19 @@ public class ConsoleMenu
 		 * else
 		 * 		clear the panel
 	 */
-	
+	public static void MenuLoop(ArrayList<GameToPlay> gameList)
+	{
+		char menuOption = 'a';
+		while(menuOption != 'q')
+		{
+			MainMenuOptions();
+			menuOption = MainMenu(gameList);
+		}
+	}
 	
 	/**
-	 * Takes in a menu option and limit of games, then prints the correct menu.
+	 * Takes in a menu option, then prints the correct menu.
 	 * @param menuOption The option to print.
-	 * @param gameLimit The limit of games in the list.
 	 */
 	public static void PrintCorrectMenu(char menuOption)
 	{
@@ -81,6 +89,7 @@ public class ConsoleMenu
 	 * ? signifies that something has gone wrong.
 	 * 
 	 */
+	/*
 	public static char MenuHandler(char menuOption, char selectedOption, ArrayList<GameToPlay> gameList)
 	{
 		char newMenu = menuOption;
@@ -95,6 +104,9 @@ public class ConsoleMenu
 		}
 		return newMenu;
 	}
+	*/
+	
+	
 	/**
 	 * Prints options for main menu. Menu option code 0.
 	 */
@@ -116,21 +128,29 @@ public class ConsoleMenu
 	 * @param gameList
 	 * @return
 	 */
-	public static char MainMenu(char selectedOption, ArrayList<GameToPlay> gameList)
+	public static char MainMenu(ArrayList<GameToPlay> gameList)
 	{
-		
+		char selectedOption = scannerChar();
 		switch(selectedOption)
 		{
 			case('1'):
+				ConsoleOptions();
+			//scan method
+				while(selectedOption != '0')
+				{
+					selectedOption = MenuZeroOne(gameList);
+				}
 				return '1';
 			case('2'):
 				//show currently playing
 				return 'w';
 			case('3'):
+				ConsoleOptions();
 				return '1';
 			case('4'):
 				return '?';
 			case('5'):
+				ConsoleOptions();
 				return '1';
 			case('6'):
 				return '?';
@@ -161,7 +181,7 @@ public class ConsoleMenu
 				+ "\n8) Playstation 2"
 				+ "\n9) Playstation 4"
 				+ "\n0) All Consoles"
-				+ "\n-) Back To Main");
+				+ "\n/) Back To Main");
 	}
 	/**
 	 * Menu code 1. 0-1. Chooses which console to print the games from.
@@ -169,8 +189,9 @@ public class ConsoleMenu
 	 * @param gameList
 	 * @return
 	 */
-	public static char MenuZeroOne(char selectedOption, ArrayList<GameToPlay> gameList)
+	public static char MenuZeroOne(ArrayList<GameToPlay> gameList)
 	{
+		char selectedOption = scannerChar();
 		switch(selectedOption)
 		{
 			case('1'):
@@ -205,13 +226,13 @@ public class ConsoleMenu
 				GameSelector.PrintAllGames(gameList);
 				break;
 			case('/'):
-				return '/';
+				break;
 			default:
 				System.out.println("Please choose an option in the list.");
-				break;
+				return '1';
 			
 		}//end switch
-		return 'q';
+		return '0';
 	}
 	/**
 	 * Menu code 2. 0-3
@@ -299,10 +320,85 @@ public class ConsoleMenu
 		System.out.println("How many would you like to choose? (Limit is " + limit + " )");
 		
 		//scanner nonsense
+		//Scanner
 		
 		System.out.println("Selecting " + 2 + " games...");
 		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(gameList, (short)2);
 		GameSelector.PrintAllGames(tempRandomList);
 		
+	}
+	
+	/**
+	 * A method that takes console input as a string and returns it.
+	 * @return A String inputed by the User.
+	 */
+	public static String scannerString()
+	{
+		@SuppressWarnings("resource")
+		Scanner scnr = new Scanner(System.in);
+		return scnr.nextLine();
+	}
+	/**
+	 * A method that takes console input as a string and  makes certain that it is a char then returns it.
+	 * @return A Char inputed by the User.
+	 */
+	public static char scannerChar()
+	{
+		@SuppressWarnings("resource")
+		Scanner scnr = new Scanner(System.in);
+		String input = scnr.next();
+		char inputC;
+		if(input.length() != 1)
+		{
+			System.out.println("Invalid Input! Please Input a Single Character:");
+			inputC = scannerChar();
+		}
+		else
+		{
+			inputC = input.charAt(0);
+		}
+		return inputC;
+	}
+	/**
+	 * A method that takes input as a double and returns it. Only allows input of doubles,
+	 * and will run until a double has been inputed.
+	 * @return A double inputed by the User.
+	 */
+	public static double scannerDouble()
+	{
+		@SuppressWarnings("resource")
+		Scanner scnr = new Scanner(System.in);
+		double input;
+		if(!scnr.hasNextDouble())
+		{
+			System.out.println("Invalid Input! Please Input a Double:");
+			input = scannerDouble();
+		}
+		else
+		{
+			input = scnr.nextDouble();
+		}
+		return input ;
+	}
+	/**
+	 * A method that takes input as a integer and returns it. Only allows input of integer,
+	 * and will run until a integer has been inputed.
+	 * @return A integer inputed by the User.
+	 */
+	public static int scannerInteger()
+	{
+		@SuppressWarnings("resource")
+		Scanner scnr = new Scanner(System.in);
+		int input;
+		if(!scnr.hasNextInt())
+		{
+			System.out.println("Invalid Input! Please Input a Integer:");
+			input = scannerInteger();
+		}
+		else
+		{
+			input = scnr.nextInt();
+		}
+		return input ;
 	}
 }
