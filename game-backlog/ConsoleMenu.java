@@ -55,6 +55,7 @@ public class ConsoleMenu
 	 * Takes in a menu option, then prints the correct menu.
 	 * @param menuOption The option to print.
 	 */
+	/*
 	public static void PrintCorrectMenu(char menuOption)
 	{
 		switch(menuOption)
@@ -80,7 +81,7 @@ public class ConsoleMenu
 			
 		}//end switch
 	}//end method
-	
+	*/
 	/**
 	 * Sends input to the correct menu. Returns what needs to be printed next.
 	 * @param menuOption
@@ -146,6 +147,10 @@ public class ConsoleMenu
 				return 'w';
 			case('3'):
 				ConsoleOptions();
+				while(selectedOption != '0')
+				{
+					selectedOption = MenuZeroThree(gameList);
+				}
 				return '1';
 			case('4'):
 				return '?';
@@ -240,8 +245,9 @@ public class ConsoleMenu
 	 * @param gameList
 	 * @return
 	 */
-	public static char MenuZeroThree(char selectedOption, ArrayList<GameToPlay> gameList)
+	public static char MenuZeroThree(ArrayList<GameToPlay> gameList)
 	{
+		char selectedOption = scannerChar();
 		ArrayList<GameToPlay> consoleGameList = gameList;
 		switch(selectedOption)
 		{
@@ -275,13 +281,13 @@ public class ConsoleMenu
 			case('0'):
 				break;
 			case('/'):
-				return '/';
+				return '0';
 			default:
 				System.out.println("Please choose an option in the list.");
 				return '2';
 		}//end switch
 		RandomOptions((short)consoleGameList.size(), consoleGameList);
-		return 'w';
+		return '0';
 	}
 	/**
 	 * Menu Option Code 2
@@ -320,10 +326,17 @@ public class ConsoleMenu
 		System.out.println("How many would you like to choose? (Limit is " + limit + " )");
 		
 		//scanner nonsense
+		int choose = scannerInteger();
+		while(choose > limit)
+		{
+			System.out.println("Please chose a number below " + limit);
+			choose = scannerInteger();
+		}
+		short chosenAmount = (short)choose;
 		//Scanner
 		
-		System.out.println("Selecting " + 2 + " games...");
-		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(gameList, (short)2);
+		System.out.println("Selecting " + chosenAmount + " games...");
+		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(gameList, chosenAmount);
 		GameSelector.PrintAllGames(tempRandomList);
 		
 	}
