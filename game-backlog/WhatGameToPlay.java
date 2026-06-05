@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * TODO: 
- * Add Terminal/GUI (future)
+ * Add GUI (future)
  * Add feature to enter/remove in current games playing.
  * -When removing games in current playing, prompt for change in game, or outright removal.
  * Add feature to remove/add games from list.
@@ -18,7 +18,7 @@ public class WhatGameToPlay
 
 	public static void main(String[] args) 
 	{
-		ArrayList<GameToPlay> gameList = FileHandler.loadGameData("GamestoPlay.csv");
+		ArrayList<GameToPlay> gameList = FileHandler.loadGameData("tempGames.csv");
 		if(gameList == null || gameList.size() == 0)
 		{
 			System.out.println("Something Went Wrong!");
@@ -28,7 +28,9 @@ public class WhatGameToPlay
 			System.out.println("Success!!\n");
 			testGameSelector(gameList);
 			testMenus(gameList);
+			testWriteOut("tempGames.csv", gameList);
 		}
+		System.out.println("Quitting...");
 		
 	}
 	
@@ -66,6 +68,11 @@ public class WhatGameToPlay
 		ConsoleMenu.MenuLoop(gameList);
 		//ConsoleMenu.MenuZeroThree('1', gameList);
 		
+	}
+	
+	public static void testWriteOut(String fileName, ArrayList<GameToPlay> gameList)
+	{
+		FileHandler.writeGameData(fileName, gameList);
 	}
 
 }

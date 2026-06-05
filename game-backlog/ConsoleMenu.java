@@ -41,14 +41,17 @@ public class ConsoleMenu
 		 * else
 		 * 		clear the panel
 	 */
-	public static void MenuLoop(ArrayList<GameToPlay> gameList)
+	public static boolean MenuLoop(ArrayList<GameToPlay> gameList)
 	{
 		char menuOption = 'a';
+		boolean changed = false;
 		while(menuOption != 'q')
 		{
-			MainMenuOptions();
+			if(menuOption != '0') {MainMenuOptions();}
 			menuOption = MainMenu(gameList);
 		}
+		
+		return changed;
 	}
 	
 	/**
@@ -141,34 +144,34 @@ public class ConsoleMenu
 				{
 					selectedOption = MenuZeroOne(gameList);
 				}
-				return '1';
+				break;
 			case('2'):
 				//show currently playing
-				return 'w';
+				break;
 			case('3'):
 				ConsoleOptions();
 				while(selectedOption != '0')
 				{
 					selectedOption = MenuZeroThree(gameList);
 				}
-				return '1';
+				break;
 			case('4'):
-				return '?';
+				break;
 			case('5'):
 				ConsoleOptions();
-				return '1';
+				break;
 			case('6'):
-				return '?';
+				break;
 			case('7'):
-				return '?';
+				break;
 			case('q'):
 				return 'q';
 			default:
 				System.out.println("Please choose an option in the list.");
-				break;
+				return '0';
 			
 		}//end switch
-		return '0';
+		return '1';
 	}
 	/**
 	 * Menu option code 1

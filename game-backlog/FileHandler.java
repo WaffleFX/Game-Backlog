@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,6 +91,30 @@ public class FileHandler
 			return null;
 		}
 	}
+	
+	public static void writeGameData(String fileName, ArrayList<GameToPlay> gameList)
+	{
+		System.out.println("Saving Game Data...");
+		try
+		{
+			FileWriter gameFile = new FileWriter(fileName);
+			PrintWriter gameWriter = new PrintWriter(gameFile);
+			
+			for(GameToPlay game: gameList)
+			{
+				gameWriter.println(game.getMinTime() + "-" + game.getMaxTime() + "," + game.getGameName() + "," + game.getConsole());
+			}
+			
+			gameWriter.close();
+			System.out.println("Saved!");
+		}
+		catch(IOException e)
+		{
+			System.out.println("Input/Output Error");
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	private static short[] parseHours(String hours)
 	{
 		String[] partsHrs = hours.split(" ", 2);
