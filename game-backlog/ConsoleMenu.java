@@ -147,6 +147,11 @@ public class ConsoleMenu
 				break;
 			case('2'):
 				//show currently playing
+				ConsoleOptions();
+				while(selectedOption != '0')
+				{
+					selectedOption = MenuZeroTwo(gameList);
+				}
 				break;
 			case('3'):
 				ConsoleOptions();
@@ -242,8 +247,54 @@ public class ConsoleMenu
 		}//end switch
 		return '0';
 	}
+	
+	public static char MenuZeroTwo(ArrayList<GameToPlay> gameList)
+	{
+		char selectedOption = scannerChar();
+		switch(selectedOption)
+		{
+			case('1'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "COM");
+				break;
+			case('2'):
+				//show currently playing
+				GameSelector.PrintPlayingConsoleGames(gameList, "EMU");
+				break;
+			case('3'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "SNS");
+				break;
+			case('4'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "GBA");
+				break;
+			case('5'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "3DS");
+				break;
+			case('6'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "WIU");
+				break;
+			case('7'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "SWI");
+				break;
+			case('8'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "PS2");
+				break;
+			case('9'):
+				GameSelector.PrintPlayingConsoleGames(gameList, "PS4");
+				break;
+			case('0'):
+				GameSelector.PrintPlayingAllGames(gameList);
+				break;
+			case('/'):
+				break;
+			default:
+				System.out.println("Please choose an option in the list.");
+				return '1';
+			
+		}//end switch
+		return '0';
+	}
 	/**
-	 * Menu code 2. 0-3
+	 * Menu code 0-3
 	 * @param selectedOption
 	 * @param gameList
 	 * @return

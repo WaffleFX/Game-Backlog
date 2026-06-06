@@ -28,7 +28,7 @@ public class WhatGameToPlay
 			System.out.println("Success!!\n");
 			testGameSelector(gameList);
 			testMenus(gameList);
-			testWriteOut("tempGames.csv", gameList);
+			testWriteOut("newTempGames.csv", gameList);
 		}
 		System.out.println("Quitting...");
 		

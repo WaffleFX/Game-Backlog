@@ -9,13 +9,15 @@ public class GameToPlay
 	private short minTime;
 	private short maxTime;
 	private String console;
+	private boolean playing;
 	
-	public GameToPlay(String name, short min, short max, String console)
+	public GameToPlay(String name, short min, short max, String console, boolean nowPlaying)
 	{
 		gameName = name;
 		minTime = min;
 		maxTime = max;
 		this.console = console;
+		playing = nowPlaying;
 	}
 	
 	/**
@@ -77,7 +79,18 @@ public class GameToPlay
 		}
 		return fullName;
 	}
-	
+	public void startPlaying()
+	{
+		playing = true;
+	}
+	public void stopPlaying()
+	{
+		playing = false;
+	}
+	public boolean getPlaying()
+	{
+		return playing;
+	}
 	/**
 	 * @return the gameName
 	 */

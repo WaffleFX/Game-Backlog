@@ -49,8 +49,9 @@ public class FileHandler
 					short gameMax;
 					String gameName;
 					String gameConsole;
+					boolean playing = false;
 					
-					for(int i = 0; i < lineLength  - 2; i+=3)
+					for(int i = 0; i < lineLength  - 3; i+=3)
 					{
 						gameName = fileInput[i+1];
 						gameConsole = fileInput[i+2];
@@ -71,8 +72,13 @@ public class FileHandler
 						}
 						gameMin = gameTime[0];
 						gameMax = gameTime[1];
+						if(fileInput[i+3].equals("1"))
+						{
+							playing = true;
+						}
 						
-						GameToPlay addedGame = new GameToPlay(gameName, gameMin, gameMax, gameConsole);
+						
+						GameToPlay addedGame = new GameToPlay(gameName, gameMin, gameMax, gameConsole, playing);
 						gameList.add(addedGame);
 						//System.out.println(addedGame.getGameComplete());
 						
@@ -80,7 +86,11 @@ public class FileHandler
 				}//End if statement
 				
 			}//end while loop (whole file)
-			System.out.println("Data Loaded!");
+			if(gameList.size() == 0)
+			{
+				System.out.println("No Data found! Please add games or try another file.");
+			}
+			else{System.out.println("Data Loaded!");}
 			gameScanner.close();
 			return gameList;
 		}
@@ -99,10 +109,19 @@ public class FileHandler
 		{
 			FileWriter gameFile = new FileWriter(fileName);
 			PrintWriter gameWriter = new PrintWriter(gameFile);
+			short playingNum = 0;
 			
 			for(GameToPlay game: gameList)
 			{
-				gameWriter.println(game.getMinTime() + "-" + game.getMaxTime() + "," + game.getGameName() + "," + game.getConsole());
+				if(game.getPlaying())
+				{
+					playingNum = 1;
+				}
+				else
+				{
+					playingNum = 0;
+				}
+				gameWriter.println(game.getMinTime() + "-" + game.getMaxTime() + "," + game.getGameName() + "," + game.getConsole() + "," + playingNum);
 			}
 			
 			gameWriter.close();

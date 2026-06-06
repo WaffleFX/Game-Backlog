@@ -13,9 +13,16 @@ public class GameSelector
 	public static void PrintConsoleGames(ArrayList<GameToPlay> gameList, String console)
 	{
 		ArrayList<GameToPlay> consoleList = GetGamesForConsole(gameList, console);
-		for(GameToPlay game: consoleList)
+		if(consoleList.size() <  1)
 		{
-			System.out.println(game.getGameComplete());
+			System.out.println("No games!");
+		}
+		else
+		{
+			for(GameToPlay game: consoleList)
+			{
+				System.out.println(game.getGameComplete());
+			}
 		}
 		
 	}//end method
@@ -23,12 +30,52 @@ public class GameSelector
 	
 	public static void PrintAllGames(ArrayList<GameToPlay> gameList)
 	{
-		for(GameToPlay game: gameList)
+		if(gameList.size() <  1)
 		{
-			System.out.println(game.getGameComplete());
+			System.out.println("No games!");
+		}
+		else
+		{
+			for(GameToPlay game: gameList)
+			{
+				System.out.println(game.getGameComplete());
+			}
 		}
 	}//end method
 	
+	public static void PrintPlayingConsoleGames(ArrayList<GameToPlay> gameList, String console)
+	{
+		ArrayList<GameToPlay> consoleList = GetGamesForConsole(gameList, console);
+		boolean found = false;
+		for(GameToPlay game: consoleList)
+		{
+			if(game.getPlaying())
+			{
+				System.out.println(game.getGameComplete());
+				found = true;
+			}
+		}
+		if(!found)
+		{
+			System.out.println("No currnetly playing games!");
+		}
+	}//end method
+	
+	public static void PrintPlayingAllGames(ArrayList<GameToPlay> gameList)
+	{
+		boolean found = false;
+		for(GameToPlay game: gameList)
+		{
+			if(game.getPlaying())
+			{
+				System.out.println(game.getGameComplete());
+			}
+		}
+		if(!found)
+		{
+			System.out.println("No currnetly playing games!");
+		}
+	}
 	
 	public static ArrayList<GameToPlay> GetGamesForConsole(ArrayList<GameToPlay> gameList, String console)
 	{
