@@ -113,7 +113,7 @@ public class FileHandler
 			
 			for(GameToPlay game: gameList)
 			{
-				if(game.getPlaying())
+				if(game.isPlaying())
 				{
 					playingNum = 1;
 				}

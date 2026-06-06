@@ -29,6 +29,7 @@ public class WhatGameToPlay
 			testGameSelector(gameList);
 			testMenus(gameList);
 			testWriteOut("newTempGames.csv", gameList);
+			//testSelectGame(gameList);
 		}
 		System.out.println("Quitting...");
 		
@@ -37,7 +38,7 @@ public class WhatGameToPlay
 	public static void testGameSelector(ArrayList<GameToPlay> gameList)
 	{
 		//GameSelector.PrintAllGames(gameList);
-		//GameSelector.PrintConsoleGames(gameList, "COM");
+		//4GameSelector.PrintConsoleGames(gameList, "COM");
 		//GameSelector.PrintConsoleGames(gameList, "EMU");
 		//GameSelector.PrintConsoleGames(gameList, "SWI");
 		//GameSelector.PrintConsoleGames(gameList, "PS2");
@@ -73,6 +74,19 @@ public class WhatGameToPlay
 	public static void testWriteOut(String fileName, ArrayList<GameToPlay> gameList)
 	{
 		FileHandler.writeGameData(fileName, gameList);
+	}
+	
+	public static void testSelectGame(ArrayList<GameToPlay> gameList)
+	{
+		GameToPlay temp = ModifyGames.SelectGame(gameList);
+		if(temp != null) 
+		{
+			System.out.println(temp.getGameName());
+			ModifyGames.AddGameToPlaying(temp);
+			
+		}
+		//ModifyGames.AddGameToPlaying(gameList);
+		GameSelector.PrintPlayingAllGames(gameList);
 	}
 
 }

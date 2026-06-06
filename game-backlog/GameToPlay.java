@@ -87,7 +87,7 @@ public class GameToPlay
 	{
 		playing = false;
 	}
-	public boolean getPlaying()
+	public boolean isPlaying()
 	{
 		return playing;
 	}

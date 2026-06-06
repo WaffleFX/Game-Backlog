@@ -49,7 +49,7 @@ public class GameSelector
 		boolean found = false;
 		for(GameToPlay game: consoleList)
 		{
-			if(game.getPlaying())
+			if(game.isPlaying())
 			{
 				System.out.println(game.getGameComplete());
 				found = true;
@@ -66,9 +66,10 @@ public class GameSelector
 		boolean found = false;
 		for(GameToPlay game: gameList)
 		{
-			if(game.getPlaying())
+			if(game.isPlaying())
 			{
 				System.out.println(game.getGameComplete());
+				found = true;
 			}
 		}
 		if(!found)
@@ -79,9 +80,48 @@ public class GameSelector
 	
 	public static ArrayList<GameToPlay> GetGamesForConsole(ArrayList<GameToPlay> gameList, String console)
 	{
+		if(!ConsoleCheck(console))
+		{
+			return null;
+		}
+		ArrayList<GameToPlay> consoleList = new ArrayList<GameToPlay>();
+		for(GameToPlay game: gameList)
+		{
+			if(game.getConsole().equals(console))
+			{
+				consoleList.add(game);
+			}
+		}
+		return consoleList;
+	}//end method
+	
+	public static ArrayList<GameToPlay> GetPlayingForConsole(ArrayList<GameToPlay> gameList, String console)
+	{
+		if(!ConsoleCheck(console))
+		{
+			return null;
+		}
+		ArrayList<GameToPlay> consoleList = new ArrayList<GameToPlay>();
+		for(GameToPlay game: gameList)
+		{
+			if(game.getConsole().equals(console) && game.isPlaying())
+			{
+				consoleList.add(game);
+			}
+		}
+		return consoleList;
+	}
+	
+	/**
+	 * Checks if the given console is accepted.
+	 * @param console
+	 * @return
+	 */
+	public static boolean ConsoleCheck(String console)
+	{
 		boolean isConsole = false;
 		short conAmount = (short)consoles.length;
-		ArrayList<GameToPlay> consoleList = new ArrayList<GameToPlay>();
+		
 		for(int i = 0; i < conAmount; i++)
 		{
 			if(console.equals(consoles[i]))
@@ -93,17 +133,10 @@ public class GameSelector
 		if(!isConsole)
 		{
 			System.out.println("Invalid Console selected.");
-			return null;
 		}
-		for(GameToPlay game: gameList)
-		{
-			if(game.getConsole().equals(console))
-			{
-				consoleList.add(game);
-			}
-		}
-		return consoleList;
-	}//end method
+		return isConsole;
+		
+	}
 	
 	/**
 	 * To be used with a list with all the games you want included in your randomization.

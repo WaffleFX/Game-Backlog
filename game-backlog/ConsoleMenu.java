@@ -161,13 +161,21 @@ public class ConsoleMenu
 				}
 				break;
 			case('4'):
+				ConsoleOptions();
+				while(selectedOption != '0')
+				{
+					selectedOption = MenuZeroFour(gameList);
+				}
 				break;
 			case('5'):
-				ConsoleOptions();
+				//ConsoleOptions();
+				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('6'):
+				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('7'):
+				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('q'):
 				return 'q';
@@ -295,6 +303,7 @@ public class ConsoleMenu
 	}
 	/**
 	 * Menu code 0-3
+	 * Used for selecting random games.
 	 * @param selectedOption
 	 * @param gameList
 	 * @return
@@ -343,12 +352,91 @@ public class ConsoleMenu
 		RandomOptions((short)consoleGameList.size(), consoleGameList);
 		return '0';
 	}
+	
 	/**
-	 * Menu Option Code 2
+	 * Used to Edit Currently playing list.
+	 */
+	public static char MenuZeroFour(ArrayList<GameToPlay> gameList)
+	{
+		char selectedOption = scannerChar();
+		String consoleName = "ALL";
+		switch(selectedOption)
+		{
+			case('1'):
+				consoleName = "COM";
+				break;
+			case('2'):
+				consoleName = "EMU";
+				break;
+			case('3'):
+				consoleName = "SNS";
+				break;
+			case('4'):
+				consoleName = "GBA";
+				break;
+			case('5'):
+				consoleName = "3DS";
+				break;
+			case('6'):
+				consoleName = "WIU";
+				break;
+			case('7'):
+				consoleName = "SWI";
+				break;
+			case('8'):
+				consoleName = "PS2";
+				break;
+			case('9'):
+				consoleName = "PS4";
+				break;
+			case('0'):
+				break;
+			case('/'):
+				return '0';
+			default:
+				System.out.println("Please choose an option in the list.");
+				return '2';
+		}//end switch
+		while(selectedOption != '/')
+		{
+			AddOrRemoveOptions();
+			selectedOption = MenuFourOne(gameList, consoleName);
+		}
+		return '0';
+	}
+	public static char MenuFourOne(ArrayList<GameToPlay> gameList, String consoleName)
+	{
+		char selectedOption = scannerChar();
+		ArrayList<GameToPlay> consoleGameList = gameList;
+		switch(selectedOption)
+		{
+		case('1'):
+			if(!consoleName.equals("ALL"))
+			{
+				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleName);
+			}
+			ModifyGames.AddGameToPlaying(consoleGameList);
+			break;
+		case('2'):
+			System.out.println("DEBUG: Not yet implemented.");
+			break;
+		case('3'):
+			System.out.println("DEBUG: Not yet implemented.");
+			break;
+		case('/'):
+			break;
+		default:
+			System.out.println("Please choose an option in the list.");
+			return '2';
+		}//end switch
+		return '/';
+	}
+	/**
+	 * Menu Option Codes 
 	 * 0-1
-	 * 0-2-3
-	 * 0-4-5-6
-	 * 0-7-8-9
+	 * 0-1
+	 * 0-1-2
+	 * 0-1-3-9
 	 * 0-s (own class)
 	 * 
 	 */
