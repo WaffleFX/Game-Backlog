@@ -21,7 +21,7 @@ public class ModifyGames
 			System.out.println((i + 1) + ")\t" + gameList.get(i).getGameName());
 			if(gameList.get(i).isPlaying())
 			{
-				System.out.print("(Already Playing)");
+				System.out.println("(Now Playing)");
 			}
 		}
 		
@@ -80,5 +80,45 @@ public class ModifyGames
 		}
 		game.startPlaying();
 	}
+	
+	public static GameToPlay RemoveGamePlaying(ArrayList<GameToPlay> gameList)
+	{
+		GameToPlay game= SelectGame(gameList);
+		if(game == null)
+		{
+			return null;
+		}
+		System.out.println("About to Remove " + game.getGameName() + " from Now Playing.\n");
+		game.stopPlaying();
+		return game;
+		
+	}//end RemoveGamePlaying
+	public static boolean RemoveGame(ArrayList<GameToPlay> gameList)
+	{
+		GameToPlay game= SelectGame(gameList);
+		if(game == null)
+		{
+			return false;
+		}
+		gameList.remove(game);
+		return true;
+	}
+	/**
+	 * @Overload
+	 * 
+	 * @param gameList
+	 * @param game
+	 * @return
+	 */
+	public static boolean RemoveGame(ArrayList<GameToPlay> gameList, GameToPlay game)
+	{
+		if(game == null)
+		{
+			return false;
+		}
+		gameList.remove(game);
+		return true;
+	}
+
 
 }

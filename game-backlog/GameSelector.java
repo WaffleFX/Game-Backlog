@@ -112,6 +112,19 @@ public class GameSelector
 		return consoleList;
 	}
 	
+	public static ArrayList<GameToPlay> GetPlayingAll(ArrayList<GameToPlay> gameList)
+	{
+		ArrayList<GameToPlay> consoleList = new ArrayList<GameToPlay>();
+		for(GameToPlay game: gameList)
+		{
+			if(game.isPlaying())
+			{
+				consoleList.add(game);
+			}
+		}
+		return consoleList;
+	}
+	
 	/**
 	 * Checks if the given console is accepted.
 	 * @param console

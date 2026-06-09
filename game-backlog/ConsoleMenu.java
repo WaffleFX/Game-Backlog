@@ -408,17 +408,30 @@ public class ConsoleMenu
 	{
 		char selectedOption = scannerChar();
 		ArrayList<GameToPlay> consoleGameList = gameList;
+		if(!consoleName.equals("ALL"))
+		{
+			consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleName);
+		}
 		switch(selectedOption)
 		{
 		case('1'):
-			if(!consoleName.equals("ALL"))
-			{
-				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleName);
-			}
 			ModifyGames.AddGameToPlaying(consoleGameList);
 			break;
 		case('2'):
-			System.out.println("DEBUG: Not yet implemented.");
+			GameToPlay tempGame = ModifyGames.RemoveGamePlaying(GameSelector.GetPlayingAll(consoleGameList));
+			if(tempGame != null)
+			{
+				ConsoleMenu.CurrentlyPlayingRemoveOptions();
+				char menuChoice = '2';
+				while(menuChoice == '2')
+				{
+					menuChoice = ConsoleMenu.MenuFourOneTwo(gameList, tempGame);
+					if(menuChoice == 't')
+					{
+						tempGame.startPlaying();
+					}	
+				}//end while
+			}//end if
 			break;
 		case('3'):
 			System.out.println("DEBUG: Not yet implemented.");
@@ -458,6 +471,29 @@ public class ConsoleMenu
 				+ "\n2) Remove"
 				+ "\n3) Do Nothing"
 				+ "\n/) Cancel");
+	}
+	public static char MenuFourOneTwo(ArrayList<GameToPlay> gameList, GameToPlay game)
+	{
+		char selectedOption = scannerChar();
+		switch(selectedOption)
+		{
+		case('1'):
+			System.out.println("DEBUG: Not yet implemented.");
+			break;
+		case('2'):
+			System.out.println("Removing " + game.getGameName() + "...");
+			ModifyGames.RemoveGame(gameList, game);
+			break;
+		case('3'):
+			break;
+		case('/'):
+			System.out.println("Not Removing " + game.getGameName() + " from Now Playing...");
+			return 't';
+		default:
+			System.out.println("Please choose an option in the list.");
+			return '2';
+		}
+		return 'r';
 	}
 	/**
 	 *
