@@ -168,13 +168,15 @@ public class ConsoleMenu
 				}
 				break;
 			case('5'):
-				//ConsoleOptions();
+				//Edit List of Games
 				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('6'):
+				//Settings Menu
 				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('7'):
+				//Help Menu
 				System.out.println("DEBUG: Not yet implemented.");
 				break;
 			case('q'):
@@ -204,6 +206,43 @@ public class ConsoleMenu
 				+ "\n0) All Consoles"
 				+ "\n/) Back To Main");
 	}
+	/**
+	 * @Overload
+	 * @param noConsole
+	 */
+	public static void ConsoleOptions(boolean noConsole)
+	{
+		if(!noConsole)
+		{
+		System.out.println("Which Console?"
+				+ "\n1) Computer"
+				+ "\n2) Emulator"
+				+ "\n3) Super Nintendo"
+				+ "\n4) GameBoy Advance"
+				+ "\n5) 3DS"
+				+ "\n6) Wii U"
+				+ "\n7) Switch"
+				+ "\n8) Playstation 2"
+				+ "\n9) Playstation 4"
+				+ "\n0) All Consoles"
+				+ "\n/) Back To Main");
+		}
+		else
+		{
+			System.out.println("Which Console?"
+					+ "\n1) Computer"
+					+ "\n2) Emulator"
+					+ "\n3) Super Nintendo"
+					+ "\n4) GameBoy Advance"
+					+ "\n5) 3DS"
+					+ "\n6) Wii U"
+					+ "\n7) Switch"
+					+ "\n8) Playstation 2"
+					+ "\n9) Playstation 4"
+					+ "\n/) Back");
+			
+		}
+	}//end ConsoleOptions overload
 	/**
 	 * Menu code 1. 0-1. Chooses which console to print the games from.
 	 * @param selectedOption
@@ -434,7 +473,8 @@ public class ConsoleMenu
 			}//end if
 			break;
 		case('3'):
-			System.out.println("DEBUG: Not yet implemented.");
+			ArrayList<GameToPlay> playingGames = GameSelector.GetPlayingAll(consoleGameList);
+			ModifyGames.ModifyGameData(playingGames);
 			break;
 		case('/'):
 			break;
@@ -495,6 +535,126 @@ public class ConsoleMenu
 		}
 		return 'r';
 	}
+	public static void ModifyOptions(GameToPlay game)
+	{
+		System.out.println("What would you like to modify?"
+				+ "\n1) Game Name (Current is " + game.getGameName() + ")"
+				+ "\n2) Game Time (Current is " + game.getMinTime() + "-" + game.getMaxTime() + " Hours)"
+				+ "\n3) Console (Current is " + game.getConsole() + ")"
+				+ "\n/) Cancel");
+	}
+	
+	public static boolean MenuModify(GameToPlay game)
+	{
+		char selectedOption = scannerChar();
+		boolean goodToGo = false;
+		switch(selectedOption)
+		{
+		case('1'):
+			System.out.println("Please enter new game name:");
+			String newGameName = scannerString();
+			goodToGo = false;
+			while(!goodToGo)
+			{
+				System.out.println("New game name is " + newGameName+". Is this okay?");
+				goodToGo = yesOrNo();
+				if(!goodToGo)
+				{
+					System.out.println("Please enter new game name:");
+					newGameName = scannerString();
+				}
+			}
+			game.setGameName(newGameName);
+			break;
+		case('2'):
+			System.out.println("Please Enter Minimum Time in Hours");
+			short newMinTime = scannerShort();
+			System.out.println("Please Enter Maximum Time in Hours");
+			short newMaxTime = scannerShort();
+			goodToGo = false;
+			while(!goodToGo)
+			{
+				System.out.println("New game time is " + newMinTime + "-" + newMaxTime + " Hours. Is this okay?");
+				goodToGo = yesOrNo();
+				if(!goodToGo)
+				{
+					System.out.println("Please Enter Minimum Time");
+					newMinTime = scannerShort();
+					System.out.println("Please Enter Maximum Time");
+					newMaxTime = scannerShort();
+				}
+			}
+			game.setMinTime(newMinTime);
+			game.setMaxTime(newMaxTime);
+			break;
+		case('3'):
+			ConsoleOptions(true);
+			String tempConsole = MenuConsole();
+			while(tempConsole == null || tempConsole == "ALL")
+			{
+				if(tempConsole == "ALL")
+				{
+					System.out.println("Please choose an option in the list.\n");
+				}
+				ConsoleOptions(true);
+				tempConsole = MenuConsole();
+			}
+			//System.out.println("DEBUG: MenuModify - Console is " + tempConsole);
+			game.setConsole(tempConsole);
+			break;
+		case('/'):
+			return true;
+		default:
+			System.out.println("Please choose an option in the list.");
+			return false;
+		}
+		System.out.println("Would you like to change something else?");
+		return !yesOrNo();
+	}
+	public static String MenuConsole()
+	{
+		char selectedOption = scannerChar();
+		String consoleName = "";
+		switch(selectedOption)
+		{
+			case('1'):
+				consoleName = "COM";
+				break;
+			case('2'):
+				consoleName = "EMU";
+				break;
+			case('3'):
+				consoleName = "SNS";
+				break;
+			case('4'):
+				consoleName = "GBA";
+				break;
+			case('5'):
+				consoleName = "3DS";
+				break;
+			case('6'):
+				consoleName = "WIU";
+				break;
+			case('7'):
+				consoleName = "SWI";
+				break;
+			case('8'):
+				consoleName = "PS2";
+				break;
+			case('9'):
+				consoleName = "PS4";
+				break;
+			case('0'):
+				consoleName = "ALL";
+				break;
+			case('/'):
+				return "";
+			default:
+				System.out.println("Please choose an option in the list.");
+				return null;
+		}//end switch
+		return consoleName;
+	}
 	/**
 	 *
 	 * @param limit
@@ -516,6 +676,33 @@ public class ConsoleMenu
 		System.out.println("Selecting " + chosenAmount + " games...");
 		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(gameList, chosenAmount);
 		GameSelector.PrintAllGames(tempRandomList);
+		
+		System.out.println("Would you like to add these to Now Playing?\n0) Yes\n1) No");
+		if(yesOrNo())
+		{
+			for(GameToPlay game: tempRandomList)
+			{
+				game.startPlaying();
+			}
+		}
+		
+	}
+	
+	public static boolean yesOrNo()
+	{
+		System.out.println("\n0) Yes\n1) No");
+		char selectedOption = scannerChar();
+		while(selectedOption != '0' && selectedOption != '1')
+		{
+			System.out.println("Please select 0 or 1.");
+			System.out.println("DEBUG: " + selectedOption);
+			selectedOption = scannerChar();
+		}
+		if(selectedOption == '0')
+		{
+			return true;
+		}
+		return false;
 		
 	}
 	
@@ -591,5 +778,26 @@ public class ConsoleMenu
 			input = scnr.nextInt();
 		}
 		return input ;
+	}
+	/**
+	 * A method that takes input as a short and returns it. Only allows input of short data type,
+	 * and will run until a short has been inputed.
+	 * @return A short inputed by the User.
+	 */
+	public static short scannerShort()
+	{
+		@SuppressWarnings("resource")
+		Scanner scnr = new Scanner(System.in);
+		short input;
+		if(!scnr.hasNextShort())
+		{
+			System.out.println("Invalid Input! Please Input a Short (Max 32767):");
+			input = scannerShort();
+		}
+		else
+		{
+			input = scnr.nextShort();
+		}
+		return input;
 	}
 }

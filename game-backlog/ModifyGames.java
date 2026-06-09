@@ -119,6 +119,37 @@ public class ModifyGames
 		gameList.remove(game);
 		return true;
 	}
-
+	public static void ModifyGameData(ArrayList<GameToPlay> gameList)
+	{
+		GameToPlay game= SelectGame(gameList);
+		if(game == null)
+		{
+			return;
+		}
+		boolean finished = false;
+		while(!finished)
+		{
+			ConsoleMenu.ModifyOptions(game);
+			finished = ConsoleMenu.MenuModify(game);
+		}
+		//System.out.println("DEBUG: ModifyGameData - Console is " + game.getConsole());
+	}
+	/**
+	 * @Overload
+	 * @param game
+	 */
+	public static void ModifyGameData(GameToPlay game)
+	{
+		if(game == null)
+		{
+			return;
+		}
+		boolean finished = false;
+		while(!finished)
+		{
+			ConsoleMenu.ModifyOptions(game);
+			finished = ConsoleMenu.MenuModify(game);
+		}
+	}
 
 }

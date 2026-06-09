@@ -118,4 +118,32 @@ public class GameToPlay
 	public String getConsole() {
 		return console;
 	}
+
+	/**
+	 * @param gameName the gameName to set
+	 */
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
+	}
+
+	/**
+	 * @param minTime the minTime to set
+	 */
+	public void setMinTime(short minTime) {
+		this.minTime = minTime;
+	}
+
+	/**
+	 * @param maxTime the maxTime to set
+	 */
+	public void setMaxTime(short maxTime) {
+		this.maxTime = maxTime;
+	}
+
+	/**
+	 * @param console the console to set
+	 */
+	public void setConsole(String console) {
+		this.console = console;
+	}
 }
