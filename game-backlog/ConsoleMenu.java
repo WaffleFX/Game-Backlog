@@ -169,7 +169,11 @@ public class ConsoleMenu
 				break;
 			case('5'):
 				//Edit List of Games
-				System.out.println("DEBUG: Not yet implemented.");
+				AddOrRemoveOptions();
+				while(selectedOption != '0')
+				{
+					selectedOption = MenuZeroFive(gameList);
+				}
 				break;
 			case('6'):
 				//Settings Menu
@@ -190,6 +194,7 @@ public class ConsoleMenu
 	}
 	/**
 	 * Menu option code 1
+	 * 
 	 */
 	public static void ConsoleOptions()
 	{
@@ -484,6 +489,57 @@ public class ConsoleMenu
 		}//end switch
 		return '/';
 	}
+	
+	public static char MenuZeroFive(ArrayList<GameToPlay> gameList)
+	{
+		char selectedOption = scannerChar();
+		ArrayList<GameToPlay> consoleGameList = gameList;
+		//to prevent null calls
+		GameToPlay tempGame = consoleGameList.getFirst();
+		String consoleChoice = "ALL";
+		
+		switch(selectedOption)
+		{
+		case('1'):
+			tempGame = ModifyGames.AddNewGame();
+			gameList.add(tempGame);
+			break;
+		case('2'):
+			ConsoleOptions();
+			consoleChoice = MenuConsole();
+			while(consoleChoice == null)
+			{
+				consoleChoice = MenuConsole();
+			}
+			if(!consoleChoice.equals(""))
+			{
+				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);
+				tempGame = ModifyGames.SelectGame(consoleGameList);
+				//System.out.println("DEBUG: consoleChoice " + consoleChoice);
+				ModifyGames.RemoveGame(gameList, tempGame);
+			}
+			break;
+		case('3'):
+			ConsoleOptions();
+			consoleChoice = MenuConsole();
+			while(consoleChoice == null)
+			{
+				consoleChoice = MenuConsole();
+			}
+			if(!consoleChoice.equals(""))
+			{
+				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);
+			}
+			ModifyGames.ModifyGameData(consoleGameList);
+			break;
+		case('/'):
+			break;
+		default:
+			System.out.println("Please choose an option in the list.");
+			return '2';
+		}//end switch
+		return '0';
+	}
 	/**
 	 * Menu Option Codes 
 	 * 0-1
@@ -518,7 +574,7 @@ public class ConsoleMenu
 		switch(selectedOption)
 		{
 		case('1'):
-			System.out.println("DEBUG: Not yet implemented.");
+			ModifyGames.ModifyGameData(game);
 			break;
 		case('2'):
 			System.out.println("Removing " + game.getGameName() + "...");

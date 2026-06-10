@@ -81,6 +81,66 @@ public class ModifyGames
 		game.startPlaying();
 	}
 	
+	public static GameToPlay AddNewGame()
+	{
+		boolean goodToGo = false;
+		//game name setting
+		System.out.println("Please enter new game name:");
+		String newGameName = ConsoleMenu.scannerString();
+		while(!goodToGo)
+		{
+			System.out.println("New game name is " + newGameName+". Is this okay?");
+			goodToGo = ConsoleMenu.yesOrNo();
+			if(!goodToGo)
+			{
+				System.out.println("Please enter new game name:");
+				newGameName = ConsoleMenu.scannerString();
+			}
+		}
+		//time setting
+		System.out.println("Please Enter Minimum Time in Hours");
+		short newMinTime = ConsoleMenu.scannerShort();
+		System.out.println("Please Enter Maximum Time in Hours");
+		short newMaxTime = ConsoleMenu.scannerShort();
+		while(!goodToGo)
+		{
+			System.out.println("New game time is " + newMinTime + "-" + newMaxTime + " Hours. Is this okay?");
+			goodToGo = ConsoleMenu.yesOrNo();
+			if(!goodToGo)
+			{
+				System.out.println("Please Enter Minimum Time");
+				newMinTime = ConsoleMenu.scannerShort();
+				System.out.println("Please Enter Maximum Time");
+				newMaxTime = ConsoleMenu.scannerShort();
+			}
+		}
+		//Console Setting
+		ConsoleMenu.ConsoleOptions(true);
+		String tempConsole = ConsoleMenu.MenuConsole();
+		goodToGo = false;
+		while(tempConsole == null || tempConsole == "ALL")
+		{
+			if(tempConsole == "ALL")
+			{
+				System.out.println("Please choose an option in the list.\n");
+			}
+			ConsoleMenu.ConsoleOptions(true);
+			tempConsole = ConsoleMenu.MenuConsole();
+		}
+		
+		
+		//Final check
+		GameToPlay newGame = new GameToPlay(newGameName, newMinTime, newMaxTime, tempConsole, false);
+		System.out.println("New game Data.\n");
+		System.out.println(newGame.getGameComplete());
+		System.out.println("Is this okay?.\n");
+		if(!ConsoleMenu.yesOrNo())
+		{
+			newGame = AddNewGame();
+		}
+		return newGame;
+	}
+	
 	public static GameToPlay RemoveGamePlaying(ArrayList<GameToPlay> gameList)
 	{
 		GameToPlay game= SelectGame(gameList);
@@ -100,6 +160,21 @@ public class ModifyGames
 		{
 			return false;
 		}
+		
+		boolean goodToGo = false;
+		while(!goodToGo)
+		{
+			System.out.println("About to Remove " + game.getGameName() + ". Is that Okay?\n");
+			goodToGo = ConsoleMenu.yesOrNo();
+			if(!goodToGo)
+			{
+				game= SelectGame(gameList);
+				if(game == null)
+				{
+					return false;
+				}
+			}
+		}//end while loop
 		gameList.remove(game);
 		return true;
 	}
