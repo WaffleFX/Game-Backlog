@@ -15,11 +15,43 @@ import java.util.Scanner;
  * Will also write to file to add or delete games.
  * 
  * @author Connor Barrett
- * @version 0.0.1
- * @since 2026-05-22
+ * @version 0.1.0
+ * @since 2026-06-10
  */
 public class FileHandler 
 {
+	public static String fileCheck(String starterFileName)
+	{
+		try
+		{
+			File gameFile = new File(starterFileName);
+			Scanner gameScanner = new Scanner(gameFile);
+			gameScanner.close();
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("File "+ starterFileName +" Not Found. Would you like to choose a different file/create a new empty file?");
+			if(ConsoleMenu.yesOrNo())
+			{
+				try 
+				{
+					System.out.println("Please enter desired file name without file extension: (e.g. gameList, backlog, turron//not gameList.csv, backlog.csv...)");
+					String newGameFile = ConsoleMenu.scannerString();
+					newGameFile = newGameFile.strip();
+					newGameFile = newGameFile + ".csv";
+					FileWriter gameFile = new FileWriter(newGameFile, true);
+					gameFile.close();
+					return newGameFile;
+				} 
+				catch (IOException e1) 
+				{
+					System.out.println("Input/Output Error");
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		return starterFileName;
+	}
 	public static ArrayList<GameToPlay> loadGameData(String fileName)
 	{
 		//Scanner scnr = new Scanner(System.in);
@@ -27,8 +59,8 @@ public class FileHandler
 		try
 		{
 			File gameFile = new File(fileName);
-			System.out.println("Found file, Loading Data...");
 			Scanner gameScanner = new Scanner(gameFile);
+			System.out.println("Found file, Loading Data...");
 			ArrayList<GameToPlay> gameList = new ArrayList<GameToPlay>();
 			while(gameScanner.hasNextLine())
 			{
@@ -96,7 +128,7 @@ public class FileHandler
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println("File Not Found Error");
+			
 			System.out.println(e.getMessage());
 			return null;
 		}
@@ -133,6 +165,8 @@ public class FileHandler
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
 	
 	private static short[] parseHours(String hours)
 	{

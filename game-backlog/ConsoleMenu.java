@@ -495,7 +495,7 @@ public class ConsoleMenu
 		char selectedOption = scannerChar();
 		ArrayList<GameToPlay> consoleGameList = gameList;
 		//to prevent null calls
-		GameToPlay tempGame = consoleGameList.getFirst();
+		GameToPlay tempGame;
 		String consoleChoice = "ALL";
 		
 		switch(selectedOption)
@@ -513,7 +513,9 @@ public class ConsoleMenu
 			}
 			if(!consoleChoice.equals(""))
 			{
-				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);
+				if(!consoleChoice.equals("ALL")) 
+				{consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);}
+	
 				tempGame = ModifyGames.SelectGame(consoleGameList);
 				//System.out.println("DEBUG: consoleChoice " + consoleChoice);
 				ModifyGames.RemoveGame(gameList, tempGame);
@@ -528,9 +530,10 @@ public class ConsoleMenu
 			}
 			if(!consoleChoice.equals(""))
 			{
-				consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);
+				if(!consoleChoice.equals("ALL")) 
+				{consoleGameList = GameSelector.GetGamesForConsole(gameList, consoleChoice);}
+				ModifyGames.ModifyGameData(consoleGameList);
 			}
-			ModifyGames.ModifyGameData(consoleGameList);
 			break;
 		case('/'):
 			break;
@@ -732,15 +735,17 @@ public class ConsoleMenu
 		System.out.println("Selecting " + chosenAmount + " games...");
 		ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(gameList, chosenAmount);
 		GameSelector.PrintAllGames(tempRandomList);
-		
-		System.out.println("Would you like to add these to Now Playing?\n0) Yes\n1) No");
-		if(yesOrNo())
+		if(tempRandomList.size() != 0)
 		{
-			for(GameToPlay game: tempRandomList)
+			System.out.println("Would you like to add these to Now Playing?");
+			if(yesOrNo())
 			{
-				game.startPlaying();
+				for(GameToPlay game: tempRandomList)
+				{
+					game.startPlaying();
+				}
 			}
-		}
+	}
 		
 	}
 	
@@ -751,7 +756,7 @@ public class ConsoleMenu
 		while(selectedOption != '0' && selectedOption != '1')
 		{
 			System.out.println("Please select 0 or 1.");
-			System.out.println("DEBUG: " + selectedOption);
+			//System.out.println("DEBUG: " + selectedOption);
 			selectedOption = scannerChar();
 		}
 		if(selectedOption == '0')

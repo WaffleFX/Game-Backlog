@@ -3,10 +3,9 @@ import java.util.ArrayList;
 /**
  * TODO: 
  * Add GUI (future)
- * Add feature to enter/remove in current games playing.
- * -When removing games in current playing, prompt for change in game, or outright removal.
- * Add feature to remove/add games from list.
+ * Add Help Menu
  * Add Settings support.
+ * 		Default File
  * Add comments.
  * 
  * @author Yungus Thugius
@@ -18,8 +17,9 @@ public class WhatGameToPlay
 
 	public static void main(String[] args) 
 	{
-		ArrayList<GameToPlay> gameList = FileHandler.loadGameData("tempGames.csv");
-		if(gameList == null || gameList.size() == 0)
+		String gameFileName = FileHandler.fileCheck("newTempGames.csv");
+		ArrayList<GameToPlay> gameList = FileHandler.loadGameData(gameFileName);
+		if(gameList == null)
 		{
 			System.out.println("Something Went Wrong!");
 		}
@@ -28,7 +28,7 @@ public class WhatGameToPlay
 			System.out.println("Success!!\n");
 			testGameSelector(gameList);
 			testMenus(gameList);
-			testWriteOut("newTempGames.csv", gameList);
+			testWriteOut(gameFileName, gameList);
 			//testSelectGame(gameList);
 		}
 		System.out.println("Quitting...");
@@ -48,7 +48,7 @@ public class WhatGameToPlay
 		//GameSelector.PrintConsoleGames(gameList, "3DS");
 		//GameSelector.PrintConsoleGames(gameList, "WIU");
 		
-		//ArrayList<GameToPlay> tempConsoleList = GameSelector.GetGamesForConsole(gameList, "COM");
+		//ArrayList<GameToPlay> tempConsoleList = GameSelector.GetGamesForConsole(gameList, "COotM");
 		//ArrayList<GameToPlay> tempRandomList = GameSelector.GetRandomGame(tempConsoleList, (short)2);
 		//GameSelector.PrintAllGames(tempRandomList);
 		
