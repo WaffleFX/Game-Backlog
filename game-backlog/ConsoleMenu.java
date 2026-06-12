@@ -7,39 +7,10 @@ import java.util.Scanner;
  */
 public class ConsoleMenu 
 {
-	//System.out.print("\033[H\033[2J"); Clears console
-	/*
-	 * default correct menu is 0, or the main menu.
-	 * z menu is set equal to 0.
-	 * while(working)
-		 * print correct menu
-		 * if(menu = z)
-		 * 		
-		 * scan input
-		 * set z menu to current menu
-		 * send the input to correct menu panel, which will affect the list/menu as needed.
-		 *  
-		 * make own method
-		 * switch statement
-		 * if(menu = w)
-		 * 		DEBUG: Showing Data...
-		 * 		while(showing text)
-		 * 			scan until q is entered.
-		 * 		set correct menu to 0.
-		 * else if(menu = z)
-		 * 		set z menu to currnet menu
-		 * else if(menu = q)
-		 * 		working = false;
-		 * case(?)
-		 * 		Error message
-		 * 		working = false
-		 * case(*)
-		 * 		Debug message for work in progress
-		 * 		Set correct menu to 0.
-		 * case(/)
-		 * 		Array. Go back one.
-		 * else
-		 * 		clear the panel
+	/**
+	 * 
+	 * @param gameList
+	 * @return
 	 */
 	public static boolean MenuLoop(ArrayList<GameToPlay> gameList)
 	{
@@ -53,62 +24,6 @@ public class ConsoleMenu
 		
 		return changed;
 	}
-	
-	/**
-	 * Takes in a menu option, then prints the correct menu.
-	 * @param menuOption The option to print.
-	 */
-	/*
-	public static void PrintCorrectMenu(char menuOption)
-	{
-		switch(menuOption)
-		{
-			case('0'):
-				MainMenuOptions();
-				break;
-			case('1'):
-				ConsoleOptions();
-				break;
-			case('2'):
-				AddOrRemoveOptions();
-				break;
-			case('3'):
-				CurrentlyPlayingRemoveOptions();
-				break;
-			case('z'):
-				System.out.println("Please input a menu option shown in the list.");
-				break;
-			default:
-				System.out.println("ERROR: Menu not found!");
-				break;
-			
-		}//end switch
-	}//end method
-	*/
-	/**
-	 * Sends input to the correct menu. Returns what needs to be printed next.
-	 * @param menuOption
-	 * @param gameList
-	 * @return Whether a menu needs to be printed next, and if so what menu. 
-	 * ? signifies that something has gone wrong.
-	 * 
-	 */
-	/*
-	public static char MenuHandler(char menuOption, char selectedOption, ArrayList<GameToPlay> gameList)
-	{
-		char newMenu = menuOption;
-		//switch statements to the different menus.
-		switch(menuOption)
-		{
-			case(0):
-				newMenu = MainMenu(selectedOption, gameList);
-				break;
-			default:
-				return '?';
-		}
-		return newMenu;
-	}
-	*/
 	
 	
 	/**
@@ -126,6 +41,8 @@ public class ConsoleMenu
 				+ "\n7) Help"
 				+ "\nq) Quit");
 	}
+	
+	
 	/**
 	 * Menu Code 0.
 	 * @param selectedOption
@@ -181,9 +98,11 @@ public class ConsoleMenu
 				break;
 			case('7'):
 				//Help Menu
-				System.out.println("DEBUG: Not yet implemented.");
+				while(!HelpMenu.MainHelpMenu()) {}
+				
 				break;
 			case('q'):
+			
 				return 'q';
 			default:
 				System.out.println("Please choose an option in the list.");
@@ -210,7 +129,7 @@ public class ConsoleMenu
 				+ "\n9) Playstation 4"
 				+ "\n0) All Consoles"
 				+ "\n/) Back To Main");
-	}
+	}//
 	/**
 	 * @Overload
 	 * @param noConsole
@@ -670,6 +589,11 @@ public class ConsoleMenu
 		System.out.println("Would you like to change something else?");
 		return !yesOrNo();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public static String MenuConsole()
 	{
 		char selectedOption = scannerChar();
@@ -714,6 +638,7 @@ public class ConsoleMenu
 		}//end switch
 		return consoleName;
 	}
+	
 	/**
 	 *
 	 * @param limit
@@ -861,4 +786,97 @@ public class ConsoleMenu
 		}
 		return input;
 	}
+	///
+	//// Unused Methods ////
+	/// 
+	//System.out.print("\033[H\033[2J"); Clears console
+			/*
+			 * default correct menu is 0, or the main menu.
+			 * z menu is set equal to 0.
+			 * while(working)
+				 * print correct menu
+				 * if(menu = z)
+				 * 		
+				 * scan input
+				 * set z menu to current menu
+				 * send the input to correct menu panel, which will affect the list/menu as needed.
+				 *  
+				 * make own method
+				 * switch statement
+				 * if(menu = w)
+				 * 		DEBUG: Showing Data...
+				 * 		while(showing text)
+				 * 			scan until q is entered.
+				 * 		set correct menu to 0.
+				 * else if(menu = z)
+				 * 		set z menu to currnet menu
+				 * else if(menu = q)
+				 * 		working = false;
+				 * case(?)
+				 * 		Error message
+				 * 		working = false
+				 * case(*)
+				 * 		Debug message for work in progress
+				 * 		Set correct menu to 0.
+				 * case(/)
+				 * 		Array. Go back one.
+				 * else
+				 * 		clear the panel
+			 */
+		/**
+		 * Takes in a menu option, then prints the correct menu.
+		 * @param menuOption The option to print.
+		 */
+		/*
+		public static void PrintCorrectMenu(char menuOption)
+		{
+			switch(menuOption)
+			{
+				case('0'):
+					MainMenuOptions();
+					break;
+				case('1'):
+					ConsoleOptions();
+					break;
+				case('2'):
+					AddOrRemoveOptions();
+					break;
+				case('3'):
+					CurrentlyPlayingRemoveOptions();
+					break;
+				case('z'):
+					System.out.println("Please input a menu option shown in the list.");
+					break;
+				default:
+					System.out.println("ERROR: Menu not found!");
+					break;
+				
+			}//end switch
+		}//end method
+		*/
+		/**
+		 * Sends input to the correct menu. Returns what needs to be printed next.
+		 * @param menuOption
+		 * @param gameList
+		 * @return Whether a menu needs to be printed next, and if so what menu. 
+		 * ? signifies that something has gone wrong.
+		 * 
+		 */
+		/*
+		public static char MenuHandler(char menuOption, char selectedOption, ArrayList<GameToPlay> gameList)
+		{
+			char newMenu = menuOption;
+			//switch statements to the different menus.
+			switch(menuOption)
+			{
+				case(0):
+					newMenu = MainMenu(selectedOption, gameList);
+					break;
+				default:
+					return '?';
+			}
+			return newMenu;
+		}
+		*/
+		
 }

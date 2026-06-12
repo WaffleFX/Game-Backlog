@@ -2,19 +2,24 @@ import java.util.ArrayList;
 
 /**
  * TODO: 
- * Add GUI (future)
- * Add Help Menu
  * Add Settings support.
  * 		Default File
  * Add comments.
  * 
+ * 
+ * Add GUI (future)
+ * 
  * @author Yungus Thugius
- * @version 0.0.2 
- * @since 2026-05-24
+ * @version 0.0.3 
+ * @since 2026-06-11
  */
 public class WhatGameToPlay
 {
 
+	/**
+	 * Main method.
+	 * @param args Terminal input.
+	 */
 	public static void main(String[] args) 
 	{
 		String gameFileName = FileHandler.fileCheck("newTempGames.csv");
@@ -35,6 +40,11 @@ public class WhatGameToPlay
 		
 	}
 	
+	/**
+	 * Method tests various methods within the GameSelector Class.
+	 * Takes input of an ArrayList of GameToPlay type to test with.
+	 * @param gameList The ArrayList of GameToPlay objects to test with.
+	 */
 	public static void testGameSelector(ArrayList<GameToPlay> gameList)
 	{
 		//GameSelector.PrintAllGames(gameList);
@@ -53,6 +63,11 @@ public class WhatGameToPlay
 		//GameSelector.PrintAllGames(tempRandomList);
 		
 	}
+	/**
+	 * Method tests various menus found in the ConsoleMenu Class.
+	 * Takes input of an ArrayList of GameToPlay type to test with.
+	 * @param gameList The ArrayList of GameToPlay objects to test with.
+	 */
 	public static void testMenus(ArrayList<GameToPlay> gameList)
 	{
 		//ConsoleMenu.MenuZeroOne('0', gameList);
@@ -71,11 +86,23 @@ public class WhatGameToPlay
 		
 	}
 	
+/**
+ * 
+ * Menu tests the write out method found in the FileHandler Class.
+ * Takes input of an ArrayList of GameToPlay type to test with, and the name of a file to write out to.
+ * @param fileName The name of the file to write out to.
+ * @param gameList The ArrayList of GameToPlay objects to test with.
+ */
 	public static void testWriteOut(String fileName, ArrayList<GameToPlay> gameList)
 	{
 		FileHandler.writeGameData(fileName, gameList);
 	}
-	
+	/**
+	 * Method tests the SelectGame method found in the ModifyGames class.
+	 * Also tests the overloaded method.
+	 * Takes input of an ArrayList of GameToPlay type to test with.
+	 * @param gameList The ArrayList of GameToPlay objects to test with.
+	 */
 	public static void testSelectGame(ArrayList<GameToPlay> gameList)
 	{
 		GameToPlay temp = ModifyGames.SelectGame(gameList);

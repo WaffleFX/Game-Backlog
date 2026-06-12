@@ -10,13 +10,15 @@ import java.util.Scanner;
  * 
  * File Handler
  * 
- * This class is meant to handle files regarding the Games to Play csv file.
- * It will take the games, play time, and console to store into an Object.
+ * This class is meant to handle files regarding the Game Backlog csv file.
+ * It has methods to either read or create a file that stores game Data
+ * It reads the file and parses the data into objects, which are then stored within an ArrayList.
+ * The class also contains methods to write the data back into the file.
  * Will also write to file to add or delete games.
  * 
- * @author Connor Barrett
+ * @author Yungus Thugius
  * @version 0.1.0
- * @since 2026-06-10
+ * @since 2026-06-11
  */
 public class FileHandler 
 {
