@@ -1,13 +1,22 @@
 import java.util.ArrayList;
 
 /**
- * TODO: 
- * Add Settings support.
- * 		Default File
- * Add comments.
+ * TODO:
+ * <ol> 
+ * <li>Add comments.
+ * <li>Add Settings support.
+ * 		<ol>
+ * 		<li>(Default File)
+ * 		</ol>
+ * </ol>
  * 
  * 
- * Add GUI (future)
+ * <p>FUTURE IMPLEMENTATIONS:
+ * <ol>
+ * 		<li>Add support for Steam game export
+ * 		<li>Add support for "Add/Remove Another?"
+ * 		<li>Add GUI 
+ * </ol>
  * 
  * @author Yungus Thugius
  * @version 0.0.3 

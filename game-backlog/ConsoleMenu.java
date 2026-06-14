@@ -2,15 +2,53 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Provides proper menus for use in the console.
- * Includes different text menus, as well as the scanner input options.
+ * ConsoleMenu
+ * 
+ * <p>This class is used in tandem with the Game Backlog Project.
+ * 
+ * <p>Provides proper menus for use in the console. The {@code MenuLoop} method is used as the main menu loop
+ * to go in and out from the different methods and menus.
+ * <p> Several methods exist only to print out the options available to the user 
+ * to the console. They are used with the menu methods so that they are
+ * printed out accordingly.
+ * 
+ * <p>The main menu includes several options that lead to other menus,
+ * each which loop until returning a specified character to quit.
+ * <br><i>Note: Should change this to return a boolean in the future. </i>
+ * 
+ * <p>Interior menus include code for working with GameToPlay objects to 
+ * modify them, or display them. Most menus work with {@code ModifyGames} and ({@code GameSelector}
+ * ,however some have the code written directly in them, or even go to their own class
+ * such as the case for {@code HelpMenu} and {@code SettingsManager}.
+ * 
+ * <p>
+ * {@code MenuConsole()} is used for specifying types of console to various menus
+ * and {@code MenuModify()} is used for options regarding the Modify game options.
+ * <br><i>Note: Should change this to be utilized more in the future. </i>
+ * 
+ * <p>Class also includes methods for looping inputs from the console.
+ * <br>Methods will only allow input of specific types, and will continue until the correct
+ * input type is given.
+ * 
+ * @author Yungus Thugius
+ * @version 0.1.0
+ * @since 2026-06-11
+ * @see GameToPlay
+ * @see GameSelector
+ * @see ModifyGames
+ * @see SettingsManager
+ * @see HelpMenu
  */
 public class ConsoleMenu 
 {
 	/**
+	 * Main menu loop for the program. 
+	 * <p>Keeps going until {@code MainMenu} returns a value signifying it has completed.
+	 * Takes in an ArrayList filled with game data to send to the different menus. 
+	 * Returns a boolean based on whether the list has been changed or not (unimplemented).
 	 * 
-	 * @param gameList
-	 * @return
+	 * @param gameList The list of games to display/modify.
+	 * @return A boolean if the list has changed or not (unimplemented)
 	 */
 	public static boolean MenuLoop(ArrayList<GameToPlay> gameList)
 	{
@@ -45,9 +83,12 @@ public class ConsoleMenu
 	
 	/**
 	 * Menu Code 0.
-	 * @param selectedOption
-	 * @param gameList
-	 * @return
+	 * <p>Takes the {@code ArrayList} of  {@code GameToPlay} objects, and based on user input, sends it to different inner menus.
+	 * The inner menus then modify/display information within the {@code gameList}.
+	 * <p>Whenever the user inputs the character {@code q}, the menu will return {@code 'q'}, 
+	 * {@code '0'} if the input was not in the list, and {@code '1'} elsewise.
+	 * @param gameList The list of games to display/modify.
+	 * @return A character based on the input.
 	 */
 	public static char MainMenu(ArrayList<GameToPlay> gameList)
 	{
@@ -113,7 +154,7 @@ public class ConsoleMenu
 	}
 	/**
 	 * Menu option code 1
-	 * 
+	 * <p>Displays the options for console selection to the console.
 	 */
 	public static void ConsoleOptions()
 	{
@@ -131,8 +172,10 @@ public class ConsoleMenu
 				+ "\n/) Back To Main");
 	}//
 	/**
-	 * @Overload
-	 * @param noConsole
+	 * Menu option code 1
+	 * <p>Displays the options for console selection.
+	 * @Overload Overloads {@code ConsoleOptions()}.
+	 * @param noConsole A boolean based on whether or not the options should have the {@code All Consoles} option.
 	 */
 	public static void ConsoleOptions(boolean noConsole)
 	{
@@ -168,10 +211,12 @@ public class ConsoleMenu
 		}
 	}//end ConsoleOptions overload
 	/**
-	 * Menu code 1. 0-1. Chooses which console to print the games from.
-	 * @param selectedOption
-	 * @param gameList
-	 * @return
+	 * Menu code Zero One. 
+	 * <p>Lets the user choose which console to print the games from.
+	 * Returns '1' if the user chooses an option outside of the list.
+	 * <i>Note: Should Utilize {@code MenuConsole} for this method.</i>
+	 * @param gameList The list of games to display/modify.
+	 * @return A character based on the input.
 	 */
 	public static char MenuZeroOne(ArrayList<GameToPlay> gameList)
 	{
@@ -218,7 +263,14 @@ public class ConsoleMenu
 		}//end switch
 		return '0';
 	}
-	
+	/**
+	 * Menu Code Zero Two.
+	 * <p>Lets the user choose which console to print the {@code Now Playing} from.
+	 * Returns '1' if the user chooses an option outside of the list.
+	 * <i>Note: Should Utilize {@code MenuConsole} for this method.</i>
+	 * @param gameList The list of games to display/modify.
+	 * @return A character based on the input.
+	 */
 	public static char MenuZeroTwo(ArrayList<GameToPlay> gameList)
 	{
 		char selectedOption = scannerChar();
@@ -265,11 +317,12 @@ public class ConsoleMenu
 		return '0';
 	}
 	/**
-	 * Menu code 0-3
-	 * Used for selecting random games.
-	 * @param selectedOption
-	 * @param gameList
-	 * @return
+	 * Menu code Zero Three.
+	 * <p>Lets the user choose the console for selecting random games.
+	 * Returns '2' if the user chooses an option outside of the list.
+	 * <i>Note: Should Utilize {@code MenuConsole} for this method.</i>
+	 * @param gameList The list of games to display/modify.
+	 * @return A character based on the input.
 	 */
 	public static char MenuZeroThree(ArrayList<GameToPlay> gameList)
 	{
@@ -317,7 +370,12 @@ public class ConsoleMenu
 	}
 	
 	/**
-	 * Used to Edit Currently playing list.
+	 * Menu Code Zero Four.
+	 * <p>Let's the user choose the console for editing the games in the {@code Now Playing} list.
+	 * Returns '2' if the user chooses an option outside of the list.
+	 * <i>Note: Should Utilize {@code MenuConsole} for this method.</i>
+	 * @param gameList The list of games to edit.
+	 * @return A character based on the input.
 	 */
 	public static char MenuZeroFour(ArrayList<GameToPlay> gameList)
 	{
@@ -366,7 +424,24 @@ public class ConsoleMenu
 			selectedOption = MenuFourOne(gameList, consoleName);
 		}
 		return '0';
-	}
+	}//end method
+	
+	
+	/**
+	 * Menu Code Four One.
+	 * <p>Allows the user to select options for modifying game data that is {@code Now Playing}.
+	 * Returns '2' if the user chooses an option outside of the list.
+	 * <i>Note: Should make this before the console selection.</i>
+	 * <p>Three options are in this menu:<ol>
+	 * <li>Add Game: Changes the {@code playing} boolean in the {@code GameToPlay} object to true.
+	 * <li>Remove Game: Changes the {@code playing} boolean in the {@code GameToPlay} object to false, as well sending the {@code GameToPlay} object
+	 * to the {@code MenuFourOneTwo} method.
+	 * <li>Modify Game: Sends the {@code GameToPlay} object to the {@code ModifyGameData} method.</ol>
+	 * 
+	 * @param gameList The list of games to edit.
+	 * @param consoleName The console which to filter the games from.
+	 * @return A character based on the input.
+	 */
 	public static char MenuFourOne(ArrayList<GameToPlay> gameList, String consoleName)
 	{
 		char selectedOption = scannerChar();
@@ -388,7 +463,7 @@ public class ConsoleMenu
 				char menuChoice = '2';
 				while(menuChoice == '2')
 				{
-					menuChoice = ConsoleMenu.MenuFourOneTwo(gameList, tempGame);
+					menuChoice = ConsoleMenu.MenuFourTwo(gameList, tempGame);
 					if(menuChoice == 't')
 					{
 						tempGame.startPlaying();
@@ -409,6 +484,18 @@ public class ConsoleMenu
 		return '/';
 	}
 	
+	
+	/**
+	 * Menu Code Zero Five.
+	 * <p>Lets the user choose whether they want to add, remove, or change games within the list.
+	 * <p>Three options are in this menu:<ol>
+	 * <li>Add Game: Creates a brand new {@code GameToPlay} object then adds it into the list.
+	 * <li>Remove Game: Removes a selected game from the given list.
+	 * <li>Modify Game: Sends the {@code GameToPlay} object to the {@code ModifyGameData} method.</ol>
+	 * 
+	 * @param gameList The list of games to edit.
+	 * @return A character based on the input.
+	 */
 	public static char MenuZeroFive(ArrayList<GameToPlay> gameList)
 	{
 		char selectedOption = scannerChar();
@@ -462,14 +549,11 @@ public class ConsoleMenu
 		}//end switch
 		return '0';
 	}
+	
+	
 	/**
-	 * Menu Option Codes 
-	 * 0-1
-	 * 0-1
-	 * 0-1-2
-	 * 0-1-3-9
-	 * 0-s (own class)
-	 * 
+	 * Menu Option Code 3.
+	 * <p>Prints out the options for modifying a {@code GameToPlay} object.
 	 */
 	public static void AddOrRemoveOptions()
 	{
@@ -479,8 +563,11 @@ public class ConsoleMenu
 				+ "\n3) Change"
 				+ "\n/) Back");
 	}
+	
+	
 	/**
-	 * Menu option Code 3
+	 * Menu option Code 4
+	 * <p>Prints out the options for after removing a game from {@code Now Playing}.
 	 */
 	public static void CurrentlyPlayingRemoveOptions()
 	{
@@ -490,7 +577,23 @@ public class ConsoleMenu
 				+ "\n3) Do Nothing"
 				+ "\n/) Cancel");
 	}
-	public static char MenuFourOneTwo(ArrayList<GameToPlay> gameList, GameToPlay game)
+	/**
+	 * Menu Code Four Two
+	 * <p>Allows the user to choose options after {@code MenuFourOne}, whether they wish to do with the {@code GameToPlay}
+	 * object, after it is removed from {@code Now Playing}.
+	 * <p>The Options are:
+	 * <ol>
+	 * <li>Modify Game: Sends the {@code GameToPlay} object to the {@code ModifyGameData} method.
+	 * <li>Remove Game: Removes a selected game from the given list.
+	 * <li>Do Nothing: Returns to the main menu with no changes to the main list.
+	 * <li>Cancel: Doesn't remove the {@code GameToPlay} object from {@code Now Playing}.
+	 * </ol>
+	 * 
+	 * @param game The {@code GameToPlay} object to edit.
+	 * @param gameList The list of games to edit.
+	 * @return A character based on the input.
+	 */
+	public static char MenuFourTwo(ArrayList<GameToPlay> gameList, GameToPlay game)
 	{
 		char selectedOption = scannerChar();
 		switch(selectedOption)
@@ -513,6 +616,13 @@ public class ConsoleMenu
 		}
 		return 'r';
 	}
+	
+	
+	/**
+	 * Prints out options for modifying a {@code GameToPlay} object. 
+	 * Takes in a {@code GameToPlay} object to show the current object.
+	 * @param game The {@code GameToPlay} to modify.
+	 */
 	public static void ModifyOptions(GameToPlay game)
 	{
 		System.out.println("What would you like to modify?"
@@ -522,6 +632,19 @@ public class ConsoleMenu
 				+ "\n/) Cancel");
 	}
 	
+	
+	/**
+	 * Menu Code Two.
+	 * <p>This method allows for the user to select between multiple options to modify a {@code GameToPlay} object.
+	 * Returns a boolean if the user is done modifying the {@code GameToPlay} object.
+	 * 
+	 * <p>Three options are in this menu for the {@code GameToPlay} that allows the user to:
+	 * <li>Game Name: Input a new Name for the object.
+	 * <li>Game Time: Input a new Minimum and Maximum time for the object.
+	 * <li>Console: Chooses a new {@code console} for the object.
+	 * @param game The {@code GameToPlay} object to modify.
+	 * @return A boolean if the user is done modifying the object.
+	 */
 	public static boolean MenuModify(GameToPlay game)
 	{
 		char selectedOption = scannerChar();
@@ -591,8 +714,10 @@ public class ConsoleMenu
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Takes in input from the user, and lets them pick from the choices to choose a console.
+	 * Returns the console code of the corresponding console code, or null if an incorrect choice.
+	 * @return The console code based on input. Null if incorrect choice chosen.
+	 * @see GameToPlay
 	 */
 	public static String MenuConsole()
 	{
@@ -640,8 +765,14 @@ public class ConsoleMenu
 	}
 	
 	/**
-	 *
-	 * @param limit
+	 * This method gets the user as many random games as they wish as long as is lies within the given {@code limit}.
+	 * <p>The method first prompts the user for the amount they want, while using the given {@code limit} to display the limit,
+	 * continuing to prompt if the user inputs something above the limit. 
+	 * The method then prints out the randomly chosen games.
+	 * 
+	 * <p>The method also prompts if the user wants to add the randomly chosen games to {@code Now Playing}.
+	 * @param limit The amount of game in the list, to be used as the limit for the amount of random games.
+	 * @param gameList The list from which to choose the random {@code GameToPlay} objects.
 	 */
 	public static void RandomOptions(short limit, ArrayList<GameToPlay> gameList)
 	{
@@ -674,6 +805,11 @@ public class ConsoleMenu
 		
 	}
 	
+	/**
+	 * A method that takes in input from the user, and returns a boolean based on the user's input.
+	 * Will prompt the user until 1 or 0 is inputed by the user.
+	 * @return A boolean based on whether the user selected yes or no.
+	 */
 	public static boolean yesOrNo()
 	{
 		System.out.println("\n0) Yes\n1) No");

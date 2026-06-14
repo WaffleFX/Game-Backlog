@@ -3,6 +3,10 @@ import java.util.ArrayList;
 /**
  * This class will add or remove games from the given list of games.
  * 
+ * @author Yungus Thugius
+ * @version 0.1.0
+ * @since 2026-06-11
+ * @see GameToPlay
  */
 public class ModifyGames 
 {

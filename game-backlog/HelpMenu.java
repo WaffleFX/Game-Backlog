@@ -1,12 +1,14 @@
 /**
- * This class is used in tandem with the Game Backlog Project.
  * 
- * The purpose of this class is to provide help through the terminal regarding the project.
+ * Help Menu.
+ * <p>This class is used in tandem with the Game Backlog Project.
+ * 
+ * <p>The purpose of this class is to provide help through the terminal regarding the project.
  * The class is comprised of a menu with several options that each go to their own unique text box to display helpful text.
- * Several methods exist within the class to print out the correct text for each option.
+ * Several methods exist within the class to print out the correct text for each option.<p>
  * 
  * @author Yungus Thugius
- * @version 0.0.3 
+ * @version 0.1.0 
  * @since 2026-06-11
  */
 public class HelpMenu 
