@@ -1,19 +1,35 @@
 import java.util.ArrayList;
 
 /**
- * This class will add or remove games from the given list of games.
+ * ModifyGames
+ * 
+ * <p>This class's purpose is to modify an {@code ArrayList} of {@code GameToPlay} objects.
+ * It has several methods to select, remove, or add a game to the {@code ArrayList}.
+ * 
+ * <p>The {@code SelectGame} method will take the given {@code ArrayList} and allow the user to select a given
+ * {@code GameToPlay} object. This method is used in conjunction with other methods such as
+ * {@code AddGameToPlaying} or {@code RemoveGame}. However, multiple overloads exist within the
+ * class to take input as a {@code GameToPlay} object rather than the full {@code ArrayList}.
+ * 
+ * <p>The method {@code ModifyGameData} is used in conjunction with the {@code MenuModify} method in {@code ConsoleMenu}.
+ * This method simply acts as a outer loop to keep the menu running.
+ * 
  * 
  * @author Yungus Thugius
  * @version 0.1.0
  * @since 2026-06-11
  * @see GameToPlay
+ * @see ConsoleMenu
  */
 public class ModifyGames 
 {
 	/**
-	 * 
-	 * @param gameList
-	 * @return
+	 * This method take the given {@code ArrayList} and displays all of the options within.
+	 * It then takes input from the user, asking again for wrong input, and selects a game based on the
+	 * user's decision. It then returns the corresponding {@code GameToPlay} object. 
+	 * If 0 is chosen, it will cancel and return null.
+	 * @param gameList The {@code ArrayList} to select from.
+	 * @return The chosen {@code GameToPlay} object; null if empty or cancelled.
 	 */
 	public static GameToPlay SelectGame(ArrayList<GameToPlay> gameList)
 	{
@@ -50,8 +66,8 @@ public class ModifyGames
 		return gameList.get(gameChoice - 1);
 	}
 	/**
-	 * Add a specified game from a given ArrayList.
-	 * @param gameList
+	 * Add a specified game from a given {@code ArrayList} to {@code Now Playing}. This method utilizes {@code SelectGame}.
+	 * @param gameList The {@code ArrayList} to add from.
 	 */
 	public static void AddGameToPlaying(ArrayList<GameToPlay> gameList)
 	{
@@ -69,12 +85,12 @@ public class ModifyGames
 	}
 	
 	/**
+	
+	 * 
+	 * <p>Adds a game to Currently Playing from a given {@code GameToPlay} object.
 	 * @Overload
 	 * Overloads AddGameToPlaying(ArrayList<GameToPlay> gameList).
-	 * 
-	 * Adds a game to Currently Playing from a given GameToPlay object.
-	 * 
-	 * @param game The game to add to  Currently Playing list.
+	 * @param game The {@code GameToPlay} object to add to  Currently Playing list.
 	 */
 	public static void AddGameToPlaying(GameToPlay game)
 	{
@@ -91,8 +107,18 @@ public class ModifyGames
 	}
 	
 	/**
+	 * Allows the user to enter data for a new {@code GameToPlay} object.
 	 * 
-	 * @return
+	 * <p>Individually allows the user to enter in the Game Name, minimum time, maximum time, and console.
+	 * Any available String is usable for the Game Name, while time requires specific short type numbers. 
+	 * Entering 0 for maximum time will cause the program to display the time as "???" for both maximum and minimum time.
+	 * Console choice only allows for the given choices.
+	 * 
+	 * <p>After inputting the information, the inputted information will be displayed
+	 * and the program will prompt the user if it is okay. Selecting no resets the method, 
+	 * and the eventual selection of yes will return the new {@code GameToPlay} object.
+	 * 
+	 * @return The newly created {@code GameToPlay} object.
 	 */
 	public static GameToPlay AddNewGame()
 	{
@@ -155,9 +181,10 @@ public class ModifyGames
 	}
 	
 	/**
-	 * 
-	 * @param gameList
-	 * @return
+	 * Selects a {@code GameToPlay} object from the given {@code ArrayList}, and removes it from {@code Now Playing}.
+	 * Returns the {@code GameToPlay} object that was stopped playing.
+	 * @param gameList The {@code ArrayList} to select the game from.
+	 * @return The {@code GameToPlay} object that was removed from {@code Now Playing}.
 	 */
 	public static GameToPlay RemoveGamePlaying(ArrayList<GameToPlay> gameList)
 	{
@@ -173,9 +200,10 @@ public class ModifyGames
 	}//end RemoveGamePlaying
 	
 	/**
-	 * 
-	 * @param gameList
-	 * @return
+	 * Selects a {@code GameToPlay} object from the given {@code ArrayList}, and removes it from the list.
+	 * Returns a boolean whether the object was removed or not.
+	 * @param gameList The {@code ArrayList} to select the game from.
+	 * @return A boolean whether the object was removed or not.
 	 */
 	public static boolean RemoveGame(ArrayList<GameToPlay> gameList)
 	{
@@ -203,11 +231,14 @@ public class ModifyGames
 		return true;
 	}
 	/**
-	 * @Overload
+	 * Removes a given {@code GameToPlay} object from the given {@code ArrayList}.
+	 * Returns a boolean whether the object was removed or not.
 	 * 
-	 * @param gameList
-	 * @param game
-	 * @return
+	 * @Overload Overloads {@code RemoveGame(ArrayList<GameToPlay> gameList)} .
+	 * @param gameList The {@code ArrayList} to remove the game from.
+	 * @param game The {@code GameToPlay} object to remove.
+	 * @return A boolean whether the object was removed or not.
+	 * 
 	 */
 	public static boolean RemoveGame(ArrayList<GameToPlay> gameList, GameToPlay game)
 	{
@@ -218,6 +249,13 @@ public class ModifyGames
 		gameList.remove(game);
 		return true;
 	}
+	/**
+	 * Works as a outer loop to {@code ConsoleMenu.MenuModify}. 
+	 * <p>Will modify a selected {@code GameToPlay} object within the given {@code ArrayList}.
+	 * Will loop until the inner method returns true.
+	 * @param gameList The {@code ArrayList} to select the {@code GameToPlay} object from.
+	 * @see ConsoleMenu.MenuModify
+	 */
 	public static void ModifyGameData(ArrayList<GameToPlay> gameList)
 	{
 		GameToPlay game= SelectGame(gameList);
@@ -234,8 +272,11 @@ public class ModifyGames
 		//System.out.println("DEBUG: ModifyGameData - Console is " + game.getConsole());
 	}
 	/**
-	 * @Overload
-	 * @param game
+	 *  Works as a outer loop to {@code ConsoleMenu.MenuModify}. 
+	 * <p>Will modify a given {@code GameToPlay} object.
+	 * Will loop until the inner method returns true.
+	 * @Overload Overloads {@code ModifyGameData(ArrayList<GameToPlay> gameList)}.
+	 * @param game The {@code GameToPlay} object to modify.
 	 */
 	public static void ModifyGameData(GameToPlay game)
 	{
