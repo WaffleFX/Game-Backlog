@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class ModifyGames 
 {
+	/**
+	 * 
+	 * @param gameList
+	 * @return
+	 */
 	public static GameToPlay SelectGame(ArrayList<GameToPlay> gameList)
 	{
 		int gameListSize =  gameList.size();
@@ -85,6 +90,10 @@ public class ModifyGames
 		game.startPlaying();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static GameToPlay AddNewGame()
 	{
 		boolean goodToGo = false;
@@ -145,6 +154,11 @@ public class ModifyGames
 		return newGame;
 	}
 	
+	/**
+	 * 
+	 * @param gameList
+	 * @return
+	 */
 	public static GameToPlay RemoveGamePlaying(ArrayList<GameToPlay> gameList)
 	{
 		GameToPlay game= SelectGame(gameList);
@@ -157,6 +171,12 @@ public class ModifyGames
 		return game;
 		
 	}//end RemoveGamePlaying
+	
+	/**
+	 * 
+	 * @param gameList
+	 * @return
+	 */
 	public static boolean RemoveGame(ArrayList<GameToPlay> gameList)
 	{
 		GameToPlay game= SelectGame(gameList);

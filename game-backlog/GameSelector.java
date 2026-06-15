@@ -3,13 +3,31 @@ import java.util.Random;
 
 
 /**
- * Class handles selecting games.
+ * Game Selector
+ * 
+ * <p>This class is used to sort and print {@code GameToPlay} objects in an {@code ArrayList} 
+ * Methods include printing games in the list, and returning games in the list, based on console or if they're {@code Now Playing}.
+ * 
+ * <p>The methods used in this class help print out games for a specified console, including they are or are not currently {@code Now Playing},
+ * with code to protect against empty lists, or no games in the current list that fit the criteria. There also exists {@code PrintAllGames},
+ * which prints every game in the list regardless.
+ * 
+ * <p>A special method, {@code GetRandomGame}, works to get an {@code ArrayList} of pseduo-randomly chosen {@code GameToPlay} objects.
+ * 
+ * @author Yungus Thugius
+ * @version 0.1.0 
+ * @since 2026-06-11
  */
 public class GameSelector 
 {
 	public static String[] consoles = {"COM","EMU","PS4","PS2","SNS","GBA","3DS","WIU","SWI"};
 	
 	
+	/**
+	 * Prints all {@code GameToPlay} objects with a specified console in a given list to the console.
+	 * @param gameList The list of {@code GameToPlay} objects to sort through and print.
+	 * @param console The console to print the {@code GameToPlay} objects from.
+	 */
 	public static void PrintConsoleGames(ArrayList<GameToPlay> gameList, String console)
 	{
 		ArrayList<GameToPlay> consoleList = GetGamesForConsole(gameList, console);
@@ -27,7 +45,10 @@ public class GameSelector
 		
 	}//end method
 	
-	
+	/**
+	 * Prints all {@code GameToPlay} objects in a given list to the console.
+	 * @param gameList The list of {@code GameToPlay} objects to print.
+	 */
 	public static void PrintAllGames(ArrayList<GameToPlay> gameList)
 	{
 		if(gameList.size() <  1)
@@ -43,6 +64,11 @@ public class GameSelector
 		}
 	}//end method
 	
+	/**
+	 * Prints all {@code GameToPlay} objects with a specified console that are {@code Now Playing} in a given list to the console.
+	 * @param gameList The list of {@code GameToPlay} objects to sort through and print.
+	 * @param console The console to print the {@code GameToPlay} objects from.
+	 */
 	public static void PrintPlayingConsoleGames(ArrayList<GameToPlay> gameList, String console)
 	{
 		ArrayList<GameToPlay> consoleList = GetGamesForConsole(gameList, console);
@@ -61,6 +87,10 @@ public class GameSelector
 		}
 	}//end method
 	
+	/**
+	 * Prints all {@code GameToPlay} objects that are {@code Now Playing} in a given list to the console.
+	 * @param gameList The list of {@code GameToPlay} objects to print.
+	 */
 	public static void PrintPlayingAllGames(ArrayList<GameToPlay> gameList)
 	{
 		boolean found = false;
@@ -78,6 +108,11 @@ public class GameSelector
 		}
 	}
 	
+	/**
+	 * Returns all {@code GameToPlay} objects with a specified console.
+	 * @param gameList The list of {@code GameToPlay} objects to sort through and return.
+	 * @param console The console to return the {@code GameToPlay} objects from.
+	 */
 	public static ArrayList<GameToPlay> GetGamesForConsole(ArrayList<GameToPlay> gameList, String console)
 	{
 		if(!ConsoleCheck(console))
@@ -95,6 +130,11 @@ public class GameSelector
 		return consoleList;
 	}//end method
 	
+	/**
+	 * Returns all {@code GameToPlay} objects with a specified console that are {@code Now Playing}.
+	 * @param gameList The list of {@code GameToPlay} objects to sort through and return.
+	 * @param console The console to return the {@code GameToPlay} objects from.
+	 */
 	public static ArrayList<GameToPlay> GetPlayingForConsole(ArrayList<GameToPlay> gameList, String console)
 	{
 		if(!ConsoleCheck(console))
@@ -112,6 +152,10 @@ public class GameSelector
 		return consoleList;
 	}
 	
+	/**
+	 * Returns all {@code GameToPlay} objects that are {@code Now Playing} in a given list.
+	 * @param gameList The list of {@code GameToPlay} objects to return.
+	 */
 	public static ArrayList<GameToPlay> GetPlayingAll(ArrayList<GameToPlay> gameList)
 	{
 		ArrayList<GameToPlay> consoleList = new ArrayList<GameToPlay>();
@@ -127,8 +171,10 @@ public class GameSelector
 	
 	/**
 	 * Checks if the given console is accepted.
-	 * @param console
-	 * @return
+	 * <p>The method checks through the class's {@code consoles} array and checks if the given console code
+	 * is present in the array. Returns a boolean based on if the console was found.
+	 * @param console The console code to check.
+	 * @return A boolean whether the console code is valid or not.
 	 */
 	public static boolean ConsoleCheck(String console)
 	{
@@ -152,10 +198,21 @@ public class GameSelector
 	}
 	
 	/**
-	 * To be used with a list with all the games you want included in your randomization.
-	 * @param gameList  The list to pull the game from.
-	 * @param amount    The amount of random game to pull.
-	 * @return An ArrayList containing all of the randomly selected games.
+	 * This method returns a list of randomly chosen {@code GameToPlay} objects.
+	 * 
+	 * <p>First, the method checks if the given amount chosen is higher than the amount in the list to choose from.
+	 * If yes, the method returns null. Else it continues.
+	 * 
+	 * <p>Then, the method takes a set of random shorts (from {@code java.util.Random} and puts them into an array
+	 * equal to the amount given. The method then takes a seperate array which compares itself with the first array
+	 * to ensure that no duplicates were found. 
+	 * 
+	 * <p>Afterwords, the array of shorts are taken as individual indexes that are pulled from the given {@code ArrayList}, 
+	 * and inserted into a new {@code ArrayList}. Once the new {@code ArrayList} is filled, it is then returned.
+	 * 
+	 * @param gameList  The {@code ArrayList} to pull the {@code GameToPlay} objects from.
+	 * @param amount    The amount of random {@code GameToPlay} objects to pull.
+	 * @return An {@code ArrayList} containing all of the randomly selected games. Null if the amount chosen is above the given amount.
 	 */
 	public static ArrayList<GameToPlay> GetRandomGame(ArrayList<GameToPlay> gameList, short amount)
 	{
