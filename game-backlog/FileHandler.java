@@ -53,6 +53,12 @@ public class FileHandler
 					System.out.println("Please enter desired file name without file extension: (e.g. gameList, backlog, turron//not gameList.csv, backlog.csv...)");
 					String newGameFile = ConsoleMenu.scannerString();
 					newGameFile = newGameFile.strip();
+					while(newGameFile.equals("properties"))
+					{
+						System.out.println("Invalid file name. Please try again.");
+						newGameFile = ConsoleMenu.scannerString();
+						newGameFile = newGameFile.strip();
+					}
 					newGameFile = newGameFile + ".csv";
 					FileWriter gameFile = new FileWriter(newGameFile, true);
 					gameFile.close();
