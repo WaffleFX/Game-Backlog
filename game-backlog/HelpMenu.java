@@ -91,7 +91,8 @@ public class HelpMenu
 				+ "The games require a Game Name (which can be just about anything),\n"
 				+ "A range of average time to beat the game in hours\n"
 				+ "(Minimum time being 20, and Maximum time being 30 for a time range of 20-30)\n"
-				+ "and a console which the game will be played on.\n");
+				+ "and a console which the game will be played on.\n"
+				+ "Inputting 0 for min and max time will result in time being ???\n");
 	}
 	/**
 	 * Prints out how the file handling the backlog is formatted.
